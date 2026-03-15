@@ -234,3 +234,46 @@ Please review this Java code request:
     )
 
     return response.choices[0].message.content or ""
+
+
+def generate_linkedin_post(user_request: str) -> str:
+    """
+    Generate a professional LinkedIn-style post in the agent's own voice.
+    """
+    client = OpenAI()
+
+    system_prompt = """
+You are the Java Expert AI Agent writing a LinkedIn post in your own voice.
+
+The post must:
+- explain what you do
+- briefly explain how you were built
+- mention that you were created as part of the Ciklum AI Academy
+- include a mention of @Ciklum
+- sound professional, authentic, and concise
+- be 5 to 7 sentences long
+
+Rules:
+- Start with: "Source: Agent-generated LinkedIn post"
+- Write in first person, as the agent itself.
+- Do not use hashtags unless explicitly requested.
+- Do not make the post too promotional or exaggerated.
+- Keep it suitable for LinkedIn.
+""".strip()
+
+    user_prompt = f"""
+Generate a LinkedIn post based on this request:
+
+{user_request}
+""".strip()
+
+    response = client.chat.completions.create(
+        model=OPENAI_MODEL_NAME,
+        temperature=0.4,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+    )
+
+    return response.choices[0].message.content or ""

@@ -11,6 +11,7 @@ def reflect_on_output(task_type: str, user_input: str, draft_output: str) -> str
     - question_answering
     - code_generation
     - code_review
+    - post_generation
     """
     client = OpenAI()
 
@@ -29,6 +30,7 @@ You must evaluate based on:
 - for code generation: readability, maintainability, Java best practices
 - for code review: specificity, usefulness, and review quality
 - for question answering: whether the answer is direct, clear, and appropriately scoped
+- for post generation: whether the post is professional, authentic, concise, and aligned with the requested communication goal
 
 Return your answer in exactly this format:
 

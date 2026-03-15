@@ -20,6 +20,7 @@ from src.agent.tools import (
     build_context_from_chunks,
     generate_java_code,
     review_java_code,
+    generate_linkedin_post,
 )
 from src.config import (
     COLLECTION_NAME,
@@ -135,6 +136,22 @@ def handle_code_review(user_input: str) -> str:
     return final_answer
 
 
+def handle_post_generation(user_input: str) -> str:
+    print("Decision: using LinkedIn post generation tool.")
+    draft_answer = generate_linkedin_post(user_input)
+
+    final_answer, reflection_text = refine_with_reflection(
+        task_type="post_generation",
+        user_input=user_input,
+        draft_output=draft_answer,
+    )
+
+    print("\n===== REFLECTION =====\n")
+    print(reflection_text)
+
+    return final_answer
+
+
 def main() -> None:
     print("Java Expert Agent - classification and code generation test started")
 
@@ -153,6 +170,8 @@ def main() -> None:
         answer = handle_code_generation(user_input)
     elif request_type == "code_review":
         answer = handle_code_review(user_input)
+    elif request_type == "post_generation":
+        answer = handle_post_generation(user_input)
     else:
         answer = "Source: Agent system message\n\nUnsupported request type."
 
