@@ -1,0 +1,50 @@
+[
+  {
+    "id": "qa_1",
+    "category": "question_answering",
+    "prompt": "What is the difference between @Autowired and @Inject?",
+    "expected_behavior": "Should answer primarily from the internal knowledge base and clearly label the source as internal knowledge base."
+  },
+  {
+    "id": "qa_2",
+    "category": "question_answering",
+    "prompt": "What is Spring AOP?",
+    "expected_behavior": "Should answer using internal knowledge base if relevant chunks are found."
+  },
+  {
+    "id": "qa_3",
+    "category": "question_answering",
+    "prompt": "What changed in recent Java virtual threads adoption guidance?",
+    "expected_behavior": "Should detect weak internal KB support and use general model knowledge or web search with transparent source labeling."
+  },
+  {
+    "id": "qa_4",
+    "category": "question_answering",
+    "prompt": "What happened in Java world in February 2026?",
+    "expected_behavior": "Should fall back to web search and clearly label the answer as web-based."
+  },
+  {
+    "id": "codegen_1",
+    "category": "code_generation",
+    "prompt": "Generate a plain Java immutable Employee class with id, name, and email.",
+    "expected_behavior": "Should generate clean plain Java code with immutable fields, constructor, getters, and a brief explanation."
+  },
+  {
+    "id": "codegen_2",
+    "category": "code_generation",
+    "prompt": "Generate a thread-safe singleton in plain Java.",
+    "expected_behavior": "Should generate a correct and readable plain Java singleton implementation and explain the approach."
+  },
+  {
+    "id": "codereview_1",
+    "category": "code_review",
+    "prompt": "Review this Java code:\n\npublic class A {\n    public String name;\n    public int age;\n}",
+    "expected_behavior": "Should identify weak encapsulation, naming issues, and provide actionable review comments."
+  },
+  {
+    "id": "codereview_2",
+    "category": "code_review",
+    "prompt": "Review this Java code:\n\npublic final class Employee {\n    private final String id;\n    private final String name;\n\n    public Employee(String id, String name) {\n        this.id = id;\n        this.name = name;\n    }\n\n    public String getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n}",
+    "expected_behavior": "Should provide a generally positive review with a few reasonable improvement suggestions such as null checks and equals/hashCode/toString."
+  }
+]

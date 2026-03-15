@@ -1,0 +1,42 @@
+```mermaid
+flowchart TD
+    A[User Request] --> B[Request Classifier]
+
+    B -->|question_answering| C[Retrieve from Qdrant KB]
+    B -->|code_generation| D[Generate Plain Java Code]
+    B -->|code_review| E[Review Java Code]
+
+    C --> F{KB strong enough?}
+    F -->|Yes| G[Answer from Internal KB]
+    F -->|No| H[Answer from General Model Knowledge]
+
+    H --> I{Model knowledge strong enough?}
+    I -->|Yes| J[Use General Model Knowledge Answer]
+    I -->|No| K[Use Web Search]
+
+    G --> L[Reflection Engine]
+    J --> L
+    K --> L
+    D --> L
+    E --> L
+
+    L --> M{KEEP or REVISE?}
+    M -->|KEEP| N[Final Output]
+    M -->|REVISE| O[Revise Output]
+    O --> N
+
+    subgraph Knowledge Base Preparation
+        P[PDF Loader]
+        Q[DOCX Loader]
+        R[Table-Aware Extraction]
+        S[Chunking]
+        T[Embeddings]
+        U[Qdrant Vector Store]
+        P --> R
+        Q --> R
+        R --> S
+        S --> T
+        T --> U
+    end
+
+    U --> C

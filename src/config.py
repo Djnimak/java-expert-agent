@@ -1,0 +1,12 @@
+QDRANT_URL = "http://localhost:6333"
+COLLECTION_NAME = "java_expert_agent_kb"
+
+EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+OPENAI_MODEL_NAME = "gpt-4o-mini"
+
+CHUNK_SIZE = 1000
+CHUNK_OVERLAP = 200
+
+TOP_K_RESULTS = 5
+MIN_KB_SCORE = 0.58
+MIN_MODEL_KNOWLEDGE_CONFIDENCE = 0.65
